@@ -1,8 +1,10 @@
 import streamlit as st
 import pandas as pd
 
+# GitHubリポジトリ内のCSVファイルのパスを指定
+file_path = 'data/testデータ.csv'
+
 # CSVファイルの読み込み
-file_path = 'C:/Users/04584/Desktop/testデータ.csv'
 df = pd.read_csv(file_path)
 
 # 列の順序を指定
