@@ -45,17 +45,23 @@ data = {
 df = pd.DataFrame(data)
 
 # Streamlitアプリ
-st.title("売上推移")
-st.write("表示する項目を選択してください。")
+st.title("店舗別データ表示")
+st.write("表示する項目と年を選択してください。")
 
-# 項目のユニーク値を取得
+# 項目の選択ウィジェット
 items = df["項目"].unique()
-
-# 項目の選択ボタンを作成
 selected_items = st.multiselect("表示する項目を選択", options=items, default=items)
 
-# 選択した項目のみを表示
+# 年の選択ウィジェット
+years = ["2021年", "2022年", "2023年", "2024年"]
+selected_years = st.multiselect("表示する年を選択", options=years, default=years)
+
+# データのフィルタリング
 filtered_df = df[df["項目"].isin(selected_items)]
+
+# 選択された年のみを表示
+columns_to_display = ["店舗名", "項目"] + selected_years
+filtered_df = filtered_df[columns_to_display]
 
 # テーブルを表示
 st.dataframe(filtered_df)
